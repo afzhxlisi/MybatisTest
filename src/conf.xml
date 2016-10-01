@@ -7,10 +7,6 @@
             <!-- 配置数据库连接信息 -->
             <dataSource type="POOLED">
                 <property name="driver" value="com.mysql.jdbc.Driver" />
-                <!--  <property name="url" value="jdbc:mysql://192.168.128.30:3310/scm_scs_data_test1?rewriteBatchedStatements=true" />
-                <property name="username" value="scm_scs_test" />
-                <property name="password" value="scm_scs_test" />
-                -->
                 <property name="url" value="jdbc:mysql://121.42.197.56:3306/test?rewriteBatchedStatements=true" />
                 <property name="username" value="test" />
                 <property name="password" value="123456" />
