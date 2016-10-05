@@ -1,6 +1,7 @@
 package me.gacl.test;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ExecutorService;
@@ -27,6 +28,7 @@ public class Test1 {
     	Jedis jedis = RedisUtil.getJedis();
     	jedis.del("redisSyncKey");
     	ExecutorService es= Executors.newCachedThreadPool();
+    	Date startDate = new Date();
     	for(int i = 0;i<10;i++){
 	    	es.execute(new Runnable() {
 				
@@ -34,8 +36,8 @@ public class Test1 {
 				public void run() {
 //					syncService.testAtomicSync();
 //					syncService.testSyncObject();	
-//					syncService.testConHashMap(concurrentMap);
-					syncService.testRedis();
+					syncService.testConHashMap(concurrentMap);
+//					syncService.testRedis();
 					
 				}
 			});
@@ -44,8 +46,12 @@ public class Test1 {
     	es.shutdown();
     	while(!es.isTerminated()){
     		Thread.sleep(50);
-    	}  	
+    	}
+    	logger.info(new Date().getTime()-startDate.getTime());
     	System.out.println("counter " +SyncService.counter.get());
+    	System.out.println("counterAct " +SyncService.counterAct.get());
+    	RedisUtil.returnResource(jedis);
+    	
     	
     }
 }
